@@ -1,0 +1,30 @@
+Aloitetaan stereo-SLAM (1201 kuvaa)...
+Frame 0 valmis. KF=1, loopit=0, kartta=146
+Frame 50 valmis. KF=6, loopit=0, kartta=808
+Frame 100 valmis. KF=11, loopit=0, kartta=1336
+Frame 150 valmis. KF=16, loopit=0, kartta=1870
+Frame 200 valmis. KF=21, loopit=0, kartta=2167
+Frame 250 valmis. KF=26, loopit=0, kartta=2549
+Frame 300 valmis. KF=31, loopit=0, kartta=2952
+Frame 350 valmis. KF=36, loopit=0, kartta=3592
+Frame 400 valmis. KF=41, loopit=0, kartta=4392
+Frame 450 valmis. KF=46, loopit=0, kartta=5046
+Frame 500 valmis. KF=51, loopit=0, kartta=5543
+Frame 550 valmis. KF=56, loopit=0, kartta=5988
+Frame 600 valmis. KF=61, loopit=0, kartta=6482
+Frame 650 valmis. KF=66, loopit=0, kartta=7192
+Frame 700 valmis. KF=71, loopit=0, kartta=7813
+Frame 750 valmis. KF=76, loopit=0, kartta=8460
+Frame 800 valmis. KF=81, loopit=0, kartta=9153
+Frame 850 valmis. KF=86, loopit=0, kartta=9911
+Frame 900 valmis. KF=91, loopit=0, kartta=11009
+Frame 950 valmis. KF=96, loopit=0, kartta=11751
+Frame 1000 valmis. KF=101, loopit=0, kartta=12449
+Frame 1050 valmis. KF=106, loopit=0, kartta=13015
+Frame 1100 valmis. KF=111, loopit=0, kartta=13593
+Frame 1150 valmis. KF=116, loopit=0, kartta=14129
+Frame 1200 valmis. KF=121, loopit=0, kartta=14531
+Front-end valmis. Keyframes: 121, loop-sulkeumia: 0, PnP-epäonnistumisia: 0
+[seq 10] Raw stereo VO:      final err   40.75 m, RMSE  24.66 m
+[seq 10] Stereo SLAM (+PGO): final err   40.75 m, RMSE  24.66 m
+Lopputulos tallennettu: /home/pekko/aalto/visual_perception_and_planning_for_autonomous_driving-EEAEV008/slam-project/results/10.png

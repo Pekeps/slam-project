@@ -21,6 +21,7 @@ Two trajectory arrays are maintained:
 Ground-truth poses, if present, are loaded purely for evaluation/plotting.
 """
 
+import argparse
 import os
 from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
@@ -54,19 +55,25 @@ from stereo import (
 # === POLUT ===
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
-SEQUENCE = "00"
-CALIB_PATH = os.path.join(
-    DATA_DIR, "data_odometry_calib", "dataset", "sequences", SEQUENCE, "calib.txt"
-)
-POSES_PATH = os.path.join(
-    DATA_DIR, "data_odometry_poses", "dataset", "poses", f"{SEQUENCE}.txt"
-)
-LEFT_DIR = os.path.join(
-    DATA_DIR, "data_odometry_gray", "dataset", "sequences", SEQUENCE, "image_0"
-)
-RIGHT_DIR = os.path.join(
-    DATA_DIR, "data_odometry_gray", "dataset", "sequences", SEQUENCE, "image_1"
-)
+RESULTS_DIR = os.path.join(PROJECT_ROOT, "results")
+
+
+def paths_for_sequence(sequence: str) -> dict:
+    """Return the calib / poses / image directory paths for a KITTI sequence."""
+    return {
+        "calib_path": os.path.join(
+            DATA_DIR, "data_odometry_calib", "dataset", "sequences", sequence, "calib.txt"
+        ),
+        "poses_path": os.path.join(
+            DATA_DIR, "data_odometry_poses", "dataset", "poses", f"{sequence}.txt"
+        ),
+        "left_dir": os.path.join(
+            DATA_DIR, "data_odometry_gray", "dataset", "sequences", sequence, "image_0"
+        ),
+        "right_dir": os.path.join(
+            DATA_DIR, "data_odometry_gray", "dataset", "sequences", sequence, "image_1"
+        ),
+    }
 
 
 @dataclass
@@ -260,13 +267,19 @@ class StereoSlam:
     ):
         self.config = config or SlamConfig()
         self.calib = read_kitti_stereo_calib(calib_path)
-        self.left_paths = load_image_paths(left_dir)[: self.config.max_frames]
-        self.right_paths = load_image_paths(right_dir)[: self.config.max_frames]
-        if len(self.left_paths) != len(self.right_paths):
-            raise RuntimeError(
-                f"left/right image count mismatch: "
-                f"{len(self.left_paths)} vs {len(self.right_paths)}"
+        left_all = load_image_paths(left_dir)
+        right_all = load_image_paths(right_dir)
+        # Some KITTI sequences (e.g. seq 08 in certain extractions) come with
+        # slightly different left/right frame counts. Truncate to the common
+        # prefix so the stereo pair is always aligned.
+        common = min(len(left_all), len(right_all))
+        if len(left_all) != len(right_all):
+            print(
+                f"warning: left/right frame count mismatch "
+                f"({len(left_all)} vs {len(right_all)}); truncating to {common}"
             )
+        self.left_paths = left_all[:common][: self.config.max_frames]
+        self.right_paths = right_all[:common][: self.config.max_frames]
         self.gt_poses: Optional[List[np.ndarray]] = None
         if poses_path is not None:
             gt = load_poses_kitti(poses_path)
@@ -781,12 +794,38 @@ def plot_slam_results(
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Run stereo SLAM on a KITTI sequence.")
+    parser.add_argument(
+        "--sequence",
+        "-s",
+        default="00",
+        help="KITTI odometry sequence number (e.g. 00, 01, ..., 10).",
+    )
+    parser.add_argument(
+        "--results-dir",
+        default=RESULTS_DIR,
+        help="Directory to write <sequence>.png and <sequence>.mp4 into.",
+    )
+    parser.add_argument(
+        "--no-video",
+        action="store_true",
+        help="Disable the side-by-side visualization video.",
+    )
+    args = parser.parse_args()
+
+    sequence = args.sequence
+    paths = paths_for_sequence(sequence)
+    os.makedirs(args.results_dir, exist_ok=True)
+    plot_path = os.path.join(args.results_dir, f"{sequence}.png")
+    video_path = None if args.no_video else os.path.join(args.results_dir, f"{sequence}.mp4")
+
+    config = SlamConfig(video_path=video_path)
     slam = StereoSlam(
-        calib_path=CALIB_PATH,
-        left_dir=LEFT_DIR,
-        right_dir=RIGHT_DIR,
-        poses_path=POSES_PATH,
-        config=SlamConfig(video_path="kitti_slam_video1.mp4"),
+        calib_path=paths["calib_path"],
+        left_dir=paths["left_dir"],
+        right_dir=paths["right_dir"],
+        poses_path=paths["poses_path"],
+        config=config,
     )
     slam.run()
 
@@ -794,13 +833,15 @@ def main() -> None:
         final_raw, rmse_raw = trajectory_error(slam.raw_poses, slam.gt_poses)
         final_opt, rmse_opt = trajectory_error(slam.live_poses, slam.gt_poses)
         print(
-            f"Raw stereo VO:       final err {final_raw:7.2f} m, RMSE {rmse_raw:6.2f} m"
+            f"[seq {sequence}] Raw stereo VO:      "
+            f"final err {final_raw:7.2f} m, RMSE {rmse_raw:6.2f} m"
         )
         print(
-            f"Stereo SLAM (+PGO):  final err {final_opt:7.2f} m, RMSE {rmse_opt:6.2f} m"
+            f"[seq {sequence}] Stereo SLAM (+PGO): "
+            f"final err {final_opt:7.2f} m, RMSE {rmse_opt:6.2f} m"
         )
 
-    plot_slam_results(slam, slam.raw_poses, slam.live_poses, "kitti_loop_result.png")
+    plot_slam_results(slam, slam.raw_poses, slam.live_poses, plot_path)
 
 
 if __name__ == "__main__":

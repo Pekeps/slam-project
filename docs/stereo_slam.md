@@ -251,29 +251,6 @@ of this closed form.
 
 ## Module: `slam_utils.py`
 
-### `Frame` (dataclass)
-
-A thin wrapper holding a grayscale image, its detected keypoints, and
-descriptors. Used by the mono pipeline (`rambon.py`) to keep related
-arrays together.
-
-### `SparseMap` (class)
-
-```python
-class SparseMap:
-    def add(self, X_w: np.ndarray, desc: np.ndarray) -> None: ...
-    def as_arrays(self) -> Tuple[np.ndarray, np.ndarray]: ...
-```
-
-An append-only collection of 3D world points and their descriptors.
-`as_arrays()` returns them as $(N, 3)$ and $(N, 32)$ numpy arrays.
-
-### `read_kitti_K(calib_path, cam="P0") -> (K, P)`
-
-Parses a single projection matrix from a KITTI calib file and returns the
-$3\times 3$ intrinsic $K = P[:,\!:\!3]$ together with the full $3\times 4$
-projection $P$.
-
 ### `load_image_paths(img_dir) -> List[str]`
 
 Globs `*.png` / `*.jpg` under `img_dir` and returns them sorted.
@@ -300,29 +277,6 @@ Closed-form rigid inverse — avoids a full matrix inverse:
 $$
 T^{-1} = \begin{bmatrix} R^\top & -R^\top t \\ 0^\top & 1 \end{bmatrix}
 $$
-
-### `triangulate_world(K, T_w_c0, T_w_c1, q0, q1) -> np.ndarray`
-
-Triangulates 3D world points from two camera poses and pixel
-correspondences. Builds world-referenced projection matrices
-$P_0 = K\,(T_w^{c_0})^{-1}[:\!3]$ and
-$P_1 = K\,(T_w^{c_1})^{-1}[:\!3]$, calls
-`cv2.triangulatePoints`, and dehomogenises. Used by the mono pipeline
-for reconstructing its sparse map.
-
-### `reproj_err_and_depth(K, T_w_c, X_w, q_px) -> (err, depth)`
-
-For each world point $\mathbf{X}_w$ and corresponding image observation
-$\mathbf{q}$, return:
-
-- the reprojection error $\lVert \pi(K, (T_w^c)^{-1}\mathbf{X}_w) - \mathbf{q}\rVert$
-- the depth $Z$ of the point in the camera frame
-
-The reprojection error is used to reject triangulations that don't
-project back onto their observed pixels. The depth check rejects points
-that ended up behind the camera or absurdly far away.
-
-*Resource:* Hartley & Zisserman §4.2.
 
 ### `skew(v) -> np.ndarray`
 

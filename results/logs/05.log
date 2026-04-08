@@ -1,0 +1,160 @@
+Aloitetaan stereo-SLAM (2761 kuvaa)...
+Frame 0 valmis. KF=1, loopit=0, kartta=154
+Frame 50 valmis. KF=6, loopit=0, kartta=868
+Frame 100 valmis. KF=11, loopit=0, kartta=1651
+Frame 150 valmis. KF=16, loopit=0, kartta=2378
+Frame 200 valmis. KF=21, loopit=0, kartta=2969
+Frame 250 valmis. KF=26, loopit=0, kartta=3402
+Frame 300 valmis. KF=31, loopit=0, kartta=4146
+Frame 350 valmis. KF=36, loopit=0, kartta=4565
+Frame 400 valmis. KF=41, loopit=0, kartta=4987
+Frame 450 valmis. KF=46, loopit=0, kartta=5962
+Frame 500 valmis. KF=51, loopit=0, kartta=6587
+Frame 550 valmis. KF=56, loopit=0, kartta=7017
+Frame 600 valmis. KF=61, loopit=0, kartta=7564
+Frame 650 valmis. KF=66, loopit=0, kartta=8226
+Frame 700 valmis. KF=71, loopit=0, kartta=9082
+Frame 750 valmis. KF=76, loopit=0, kartta=9634
+Frame 800 valmis. KF=81, loopit=0, kartta=10170
+Frame 850 valmis. KF=86, loopit=0, kartta=10925
+Frame 900 valmis. KF=91, loopit=0, kartta=11782
+Frame 950 valmis. KF=96, loopit=0, kartta=12538
+Frame 1000 valmis. KF=101, loopit=0, kartta=13121
+Frame 1050 valmis. KF=106, loopit=0, kartta=13756
+Frame 1100 valmis. KF=111, loopit=0, kartta=14336
+Frame 1150 valmis. KF=116, loopit=0, kartta=14968
+Frame 1200 valmis. KF=121, loopit=0, kartta=15715
+Frame 1250 valmis. KF=126, loopit=0, kartta=16364
+Frame 1300 valmis. KF=131, loopit=0, kartta=16893
+  frame 1320: LOOP KF56 <-> KF132 (inliers=83)
+  frame 1320: LOOP KF57 <-> KF132 (inliers=71)
+    PGO: cost 188.413 -> 0.001 (93 nfev)
+  frame 1330: LOOP KF57 <-> KF133 (inliers=128)
+    PGO: cost 0.002 -> 0.001 (50 nfev)
+  frame 1340: LOOP KF58 <-> KF134 (inliers=139)
+    PGO: cost 0.008 -> 0.002 (4 nfev)
+  frame 1350: LOOP KF59 <-> KF135 (inliers=123)
+    PGO: cost 0.008 -> 0.004 (4 nfev)
+Frame 1350 valmis. KF=136, loopit=5, kartta=17478
+  frame 1360: LOOP KF60 <-> KF136 (inliers=168)
+  frame 1360: LOOP KF61 <-> KF136 (inliers=92)
+    PGO: cost 0.020 -> 0.006 (4 nfev)
+  frame 1370: LOOP KF61 <-> KF137 (inliers=160)
+  frame 1370: LOOP KF62 <-> KF137 (inliers=94)
+    PGO: cost 0.020 -> 0.011 (6 nfev)
+  frame 1380: LOOP KF62 <-> KF138 (inliers=140)
+  frame 1380: LOOP KF63 <-> KF138 (inliers=89)
+    PGO: cost 0.027 -> 0.015 (6 nfev)
+  frame 1390: LOOP KF63 <-> KF139 (inliers=137)
+  frame 1390: LOOP KF64 <-> KF139 (inliers=100)
+    PGO: cost 0.071 -> 0.029 (4 nfev)
+  frame 1400: LOOP KF64 <-> KF140 (inliers=104)
+  frame 1400: LOOP KF65 <-> KF140 (inliers=151)
+    PGO: cost 0.062 -> 0.035 (6 nfev)
+Frame 1400 valmis. KF=141, loopit=15, kartta=18093
+  frame 1410: LOOP KF65 <-> KF141 (inliers=93)
+  frame 1410: LOOP KF66 <-> KF141 (inliers=154)
+    PGO: cost 0.044 -> 0.035 (4 nfev)
+  frame 1420: LOOP KF66 <-> KF142 (inliers=77)
+  frame 1420: LOOP KF67 <-> KF142 (inliers=134)
+    PGO: cost 0.144 -> 0.070 (4 nfev)
+  frame 1430: LOOP KF67 <-> KF143 (inliers=92)
+  frame 1430: LOOP KF68 <-> KF143 (inliers=252)
+  frame 1430: LOOP KF69 <-> KF143 (inliers=74)
+    PGO: cost 0.206 -> 0.074 (8 nfev)
+  frame 1440: LOOP KF68 <-> KF144 (inliers=125)
+  frame 1440: LOOP KF69 <-> KF144 (inliers=435)
+  frame 1440: LOOP KF70 <-> KF144 (inliers=57)
+    PGO: cost 0.122 -> 0.091 (6 nfev)
+  frame 1450: LOOP KF69 <-> KF145 (inliers=62)
+  frame 1450: LOOP KF70 <-> KF145 (inliers=405)
+    PGO: cost 0.125 -> 0.108 (4 nfev)
+Frame 1450 valmis. KF=146, loopit=27, kartta=18881
+  frame 1460: LOOP KF71 <-> KF146 (inliers=187)
+  frame 1460: LOOP KF72 <-> KF146 (inliers=65)
+    PGO: cost 0.253 -> 0.127 (6 nfev)
+  frame 1470: LOOP KF72 <-> KF147 (inliers=128)
+    PGO: cost 0.130 -> 0.127 (3 nfev)
+  frame 1480: LOOP KF74 <-> KF148 (inliers=78)
+    PGO: cost 0.128 -> 0.127 (4 nfev)
+  frame 1490: LOOP KF75 <-> KF149 (inliers=120)
+    PGO: cost 0.134 -> 0.128 (3 nfev)
+  frame 1500: LOOP KF75 <-> KF150 (inliers=80)
+  frame 1500: LOOP KF76 <-> KF150 (inliers=138)
+    PGO: cost 0.132 -> 0.129 (4 nfev)
+Frame 1500 valmis. KF=151, loopit=34, kartta=19432
+  frame 1510: LOOP KF76 <-> KF151 (inliers=77)
+  frame 1510: LOOP KF77 <-> KF151 (inliers=100)
+  frame 1510: LOOP KF78 <-> KF151 (inliers=70)
+    PGO: cost 0.214 -> 0.146 (5 nfev)
+  frame 1520: LOOP KF78 <-> KF152 (inliers=134)
+    PGO: cost 0.156 -> 0.148 (4 nfev)
+  frame 1530: LOOP KF78 <-> KF153 (inliers=106)
+  frame 1530: LOOP KF79 <-> KF153 (inliers=98)
+    PGO: cost 0.172 -> 0.161 (5 nfev)
+  frame 1540: LOOP KF79 <-> KF154 (inliers=119)
+    PGO: cost 0.170 -> 0.163 (3 nfev)
+  frame 1550: LOOP KF79 <-> KF155 (inliers=77)
+    PGO: cost 0.178 -> 0.168 (3 nfev)
+Frame 1550 valmis. KF=156, loopit=42, kartta=19917
+Frame 1600 valmis. KF=161, loopit=42, kartta=20428
+Frame 1650 valmis. KF=166, loopit=42, kartta=21032
+Frame 1700 valmis. KF=171, loopit=42, kartta=21768
+Frame 1750 valmis. KF=176, loopit=42, kartta=22381
+Frame 1800 valmis. KF=181, loopit=42, kartta=22985
+Frame 1850 valmis. KF=186, loopit=42, kartta=23789
+Frame 1900 valmis. KF=191, loopit=42, kartta=24461
+Frame 1950 valmis. KF=196, loopit=42, kartta=25147
+Frame 2000 valmis. KF=201, loopit=42, kartta=25856
+Frame 2050 valmis. KF=206, loopit=42, kartta=26635
+Frame 2100 valmis. KF=211, loopit=42, kartta=27323
+Frame 2150 valmis. KF=216, loopit=42, kartta=28140
+Frame 2200 valmis. KF=221, loopit=42, kartta=28860
+Frame 2250 valmis. KF=226, loopit=42, kartta=29618
+Frame 2300 valmis. KF=231, loopit=42, kartta=30389
+Frame 2350 valmis. KF=236, loopit=42, kartta=31087
+Frame 2400 valmis. KF=241, loopit=42, kartta=31764
+  frame 2430: LOOP KF2 <-> KF243 (inliers=87)
+  frame 2430: LOOP KF3 <-> KF243 (inliers=160)
+    PGO: cost 2588.503 -> 0.190 (99 nfev)
+  frame 2440: LOOP KF4 <-> KF244 (inliers=87)
+    PGO: cost 0.205 -> 0.180 (17 nfev)
+  frame 2450: LOOP KF5 <-> KF245 (inliers=135)
+    PGO: cost 0.182 -> 0.180 (10 nfev)
+Frame 2450 valmis. KF=246, loopit=46, kartta=32493
+  frame 2460: LOOP KF6 <-> KF246 (inliers=247)
+    PGO: cost 0.191 -> 0.182 (5 nfev)
+  frame 2470: LOOP KF7 <-> KF247 (inliers=201)
+    PGO: cost 0.193 -> 0.183 (3 nfev)
+  frame 2480: LOOP KF8 <-> KF248 (inliers=243)
+    PGO: cost 0.187 -> 0.183 (5 nfev)
+  frame 2490: LOOP KF9 <-> KF249 (inliers=197)
+    PGO: cost 0.201 -> 0.186 (4 nfev)
+  frame 2500: LOOP KF10 <-> KF250 (inliers=221)
+    PGO: cost 0.192 -> 0.187 (4 nfev)
+Frame 2500 valmis. KF=251, loopit=51, kartta=33227
+  frame 2510: LOOP KF11 <-> KF251 (inliers=132)
+  frame 2510: LOOP KF12 <-> KF251 (inliers=243)
+    PGO: cost 0.196 -> 0.192 (4 nfev)
+  frame 2520: LOOP KF12 <-> KF252 (inliers=58)
+    PGO: cost 0.213 -> 0.195 (4 nfev)
+Frame 2550 valmis. KF=256, loopit=54, kartta=33999
+  frame 2580: LOOP KF81 <-> KF258 (inliers=105)
+  frame 2580: LOOP KF82 <-> KF258 (inliers=93)
+    PGO: cost 437.807 -> 0.200 (52 nfev)
+  frame 2590: LOOP KF83 <-> KF259 (inliers=134)
+    PGO: cost 0.248 -> 0.200 (38 nfev)
+  frame 2600: LOOP KF84 <-> KF260 (inliers=61)
+    PGO: cost 0.217 -> 0.200 (4 nfev)
+Frame 2600 valmis. KF=261, loopit=58, kartta=34861
+  frame 2610: LOOP KF86 <-> KF261 (inliers=182)
+    PGO: cost 0.205 -> 0.201 (5 nfev)
+  frame 2630: LOOP KF89 <-> KF263 (inliers=91)
+    PGO: cost 2.172 -> 0.453 (22 nfev)
+Frame 2650 valmis. KF=266, loopit=60, kartta=35686
+Frame 2700 valmis. KF=271, loopit=60, kartta=36545
+Frame 2750 valmis. KF=276, loopit=60, kartta=37425
+Front-end valmis. Keyframes: 277, loop-sulkeumia: 60, PnP-epäonnistumisia: 0
+[seq 05] Raw stereo VO:      final err   68.13 m, RMSE  29.34 m
+[seq 05] Stereo SLAM (+PGO): final err   40.55 m, RMSE  27.62 m
+Lopputulos tallennettu: /home/pekko/aalto/visual_perception_and_planning_for_autonomous_driving-EEAEV008/slam-project/results/05.png
