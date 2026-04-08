@@ -154,3 +154,133 @@ def pose_error_6d(T_err: np.ndarray) -> np.ndarray:
     t_err = T_err[:3, 3]
     rvec, _ = cv2.Rodrigues(R_err)
     return np.concatenate([t_err, rvec.ravel()])
+
+
+# === BATCHED SE(3) HELPERS ===
+# Pure-numpy operations over leading batch dimensions. Used by the pose-graph
+# optimizer to avoid the Python-level per-edge loop, which is the dominant
+# cost of each residual evaluation at graph sizes >~100 vertices.
+
+
+def rigid_inverse_batch(T: np.ndarray) -> np.ndarray:
+    """Batched closed-form rigid inverse for SE(3) matrices.
+
+    For ``T = [[R, t], [0, 1]]`` the inverse is ``[[R.T, -R.T @ t], [0, 1]]``,
+    which avoids the general 4x4 matrix inverse and is much faster.
+
+    Parameters
+    ----------
+    T : np.ndarray, shape (..., 4, 4)
+
+    Returns
+    -------
+    np.ndarray, shape (..., 4, 4)
+    """
+    R = T[..., :3, :3]
+    t = T[..., :3, 3:4]
+    R_T = np.swapaxes(R, -1, -2)
+    out = np.zeros_like(T)
+    out[..., :3, :3] = R_T
+    out[..., :3, 3:4] = -(R_T @ t)
+    out[..., 3, 3] = 1.0
+    return out
+
+
+def se3_exp_batch(xi: np.ndarray) -> np.ndarray:
+    """Batched SE(3) exponential map.
+
+    Parameters
+    ----------
+    xi : np.ndarray, shape (..., 6), layout [rho; phi]
+        ``rho`` (first three entries) is the translation part; ``phi`` (last
+        three entries) is the axis-angle rotation part.
+
+    Returns
+    -------
+    np.ndarray, shape (..., 4, 4)
+    """
+    rho = xi[..., :3]
+    phi = xi[..., 3:]
+    batch_shape = xi.shape[:-1]
+
+    # Skew-symmetric matrix of phi (the hat operator applied to each element
+    # of the batch).
+    phi_hat = np.zeros(batch_shape + (3, 3), dtype=xi.dtype)
+    phi_hat[..., 0, 1] = -phi[..., 2]
+    phi_hat[..., 0, 2] = phi[..., 1]
+    phi_hat[..., 1, 0] = phi[..., 2]
+    phi_hat[..., 1, 2] = -phi[..., 0]
+    phi_hat[..., 2, 0] = -phi[..., 1]
+    phi_hat[..., 2, 1] = phi[..., 0]
+
+    phi_hat_sq = phi_hat @ phi_hat
+
+    theta = np.linalg.norm(phi, axis=-1)  # (...,)
+    small = theta < 1e-8
+    theta_safe = np.where(small, 1.0, theta)
+    sin_t = np.sin(theta_safe)
+    cos_t = np.cos(theta_safe)
+
+    # Taylor expansions for the small-angle branch:
+    #   sin(t)/t          ≈ 1
+    #   (1-cos(t))/t^2    ≈ 1/2
+    #   (t - sin(t))/t^3  ≈ 1/6
+    a = np.where(small, 1.0, sin_t / theta_safe)
+    b = np.where(small, 0.5, (1.0 - cos_t) / (theta_safe * theta_safe))
+    d = np.where(small, 1.0 / 6.0, (theta_safe - sin_t) / (theta_safe**3))
+
+    # Broadcast scalar coefficients against 3x3 phi_hat
+    a = a[..., np.newaxis, np.newaxis]
+    b = b[..., np.newaxis, np.newaxis]
+    d = d[..., np.newaxis, np.newaxis]
+
+    I3 = np.eye(3, dtype=xi.dtype)
+    R = I3 + a * phi_hat + b * phi_hat_sq
+    V = I3 + b * phi_hat + d * phi_hat_sq
+
+    V_rho = np.einsum("...ij,...j->...i", V, rho)  # (..., 3)
+
+    out = np.zeros(batch_shape + (4, 4), dtype=xi.dtype)
+    out[..., :3, :3] = R
+    out[..., :3, 3] = V_rho
+    out[..., 3, 3] = 1.0
+    return out
+
+
+def rot_to_angle_axis_batch(R: np.ndarray) -> np.ndarray:
+    """Batched SO(3) log map via the angle-axis representation.
+
+    Uses the standard Rodrigues-inverse formula with a small-angle fallback.
+    Degenerates near rotation angle ``pi``; this is acceptable for
+    pose-graph residuals which should never see rotations that large once
+    the estimate is anywhere near the optimum.
+
+    Parameters
+    ----------
+    R : np.ndarray, shape (..., 3, 3)
+
+    Returns
+    -------
+    np.ndarray, shape (..., 3)
+    """
+    trace = R[..., 0, 0] + R[..., 1, 1] + R[..., 2, 2]
+    cos_theta = np.clip(0.5 * (trace - 1.0), -1.0, 1.0)
+    theta = np.arccos(cos_theta)
+
+    # Asymmetric part of R: equals 2*sin(theta) * axis
+    asym = np.stack(
+        [
+            R[..., 2, 1] - R[..., 1, 2],
+            R[..., 0, 2] - R[..., 2, 0],
+            R[..., 1, 0] - R[..., 0, 1],
+        ],
+        axis=-1,
+    )
+
+    sin_theta = np.sin(theta)
+    safe_sin = np.where(np.abs(sin_theta) < 1e-12, 1.0, sin_theta)
+    # rvec = (theta / (2 sin theta)) * asym
+    # For small theta: asym ≈ 2*theta*axis, so 0.5 * asym ≈ theta * axis = rvec
+    small = theta < 1e-6
+    scale = np.where(small, 0.5, theta / (2.0 * safe_sin))
+    return asym * scale[..., np.newaxis]
