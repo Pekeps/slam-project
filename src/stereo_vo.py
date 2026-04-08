@@ -54,7 +54,7 @@ RIGHT_DIR = os.path.join(
 
 @dataclass
 class StereoVOConfig:
-    max_frames: int = 4000
+    max_frames: int = 400
     n_features: int = 3000
     ratio_test: float = 0.70
     pnp_reproj_err_px: float = 3.0
