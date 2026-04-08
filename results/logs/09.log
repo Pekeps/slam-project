@@ -34,18 +34,19 @@ Frame 1550 valmis. KF=156, loopit=0, kartta=22635
   frame 1590: LOOP KF2 <-> KF159 (inliers=85)
     PGO: cost 4066.247 -> 359.911 (500 nfev)
 Front-end valmis. Keyframes: 160, loop-sulkeumia: 1, PnP-epäonnistumisia: 0
+[seq 09] runtime:  367.60 s total (231.05 ms/frame, 1591 frames)
 [seq 09] trajectory saved: /home/pekko/aalto/visual_perception_and_planning_for_autonomous_driving-EEAEV008/slam-project/results/09.txt
 [seq 09] Raw stereo VO:      final err   93.89 m, RMSE  66.16 m
 [seq 09] Stereo SLAM (+PGO): final err   42.34 m, RMSE  65.45 m
-[seq 09] KITTI raw VO:       t_err   4.00 %,  r_err 15.333 deg/km (958 segs)
-[seq 09] KITTI SLAM (+PGO):  t_err   6.02 %,  r_err 24.030 deg/km (958 segs)
+[seq 09] KITTI raw VO:       t_err   4.00 %,  r_err  0.01533 deg/m (958 segs)
+[seq 09] KITTI SLAM (+PGO):  t_err   6.02 %,  r_err  0.02403 deg/m (958 segs)
 [seq 09] KITTI per-length (SLAM):
-[seq 09]   L= 100 m: t_err   4.16 %,  r_err 40.958 deg/km
-[seq 09]   L= 200 m: t_err   4.62 %,  r_err 27.777 deg/km
-[seq 09]   L= 300 m: t_err   5.36 %,  r_err 23.624 deg/km
-[seq 09]   L= 400 m: t_err   5.67 %,  r_err 20.690 deg/km
-[seq 09]   L= 500 m: t_err   6.40 %,  r_err 18.907 deg/km
-[seq 09]   L= 600 m: t_err   7.26 %,  r_err 18.246 deg/km
-[seq 09]   L= 700 m: t_err   8.18 %,  r_err 17.922 deg/km
-[seq 09]   L= 800 m: t_err   8.54 %,  r_err 15.799 deg/km
+[seq 09]   L= 100 m: t_err   4.16 %,  r_err  0.04096 deg/m
+[seq 09]   L= 200 m: t_err   4.62 %,  r_err  0.02778 deg/m
+[seq 09]   L= 300 m: t_err   5.36 %,  r_err  0.02362 deg/m
+[seq 09]   L= 400 m: t_err   5.67 %,  r_err  0.02069 deg/m
+[seq 09]   L= 500 m: t_err   6.40 %,  r_err  0.01891 deg/m
+[seq 09]   L= 600 m: t_err   7.26 %,  r_err  0.01825 deg/m
+[seq 09]   L= 700 m: t_err   8.18 %,  r_err  0.01792 deg/m
+[seq 09]   L= 800 m: t_err   8.54 %,  r_err  0.01580 deg/m
 Lopputulos tallennettu: /home/pekko/aalto/visual_perception_and_planning_for_autonomous_driving-EEAEV008/slam-project/results/09.png

@@ -49,4 +49,11 @@ echo "all jobs done in $((end_time - start_time)) s"
 echo "results:"
 ls -la results/*.png results/*.mp4 2>/dev/null || true
 
+echo
+echo "=== KITTI benchmark ==="
+"$PY" scripts/kitti_summary.py \
+    --results-dir results \
+    --sequences "${SEQUENCES[@]}" \
+    --output results/benchmark.txt
+
 exit $failed

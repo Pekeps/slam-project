@@ -17,6 +17,7 @@ Ground-truth poses, if present, are loaded purely for evaluation/plotting.
 
 import argparse
 import os
+import time
 from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
 
@@ -798,8 +799,9 @@ def kitti_segment_errors(
     3. Compute the relative transform between frames ``i`` and ``j`` in both
        the estimate and the ground truth, and measure the error as
        ``E = (ΔT_gt)^{-1} (ΔT_est)``.
-    4. Translational error ``e_t = |E[:3, 3]| / L`` (a fraction).
-       Rotational error ``e_r = arccos((tr R_err - 1)/2) / L`` (rad/m).
+    4. Translational error ``e_t = |E[:3, 3]| / L`` (fraction, reported as %).
+       Rotational error ``e_r = arccos((tr R_err - 1)/2) / L`` (rad/m,
+       reported as deg/m).
     5. Average across every valid (start, length) pair.
 
     Returns a dict:
@@ -808,9 +810,9 @@ def kitti_segment_errors(
     - ``overall``: ``(avg_t_err_pct, avg_r_err_deg_per_m)``
     - ``n_segments``: total count of evaluated segments
 
-    Percentages are in percent translation drift (e.g. 1.5 = 1.5 %/100m),
-    and rotations are in degrees per meter traveled. These are the units
-    that appear in every published KITTI VO table.
+    Units match the KITTI odometry leaderboard: translational error in
+    percent (e.g. 1.5 = 1.5 %/100 m), rotational error in degrees per
+    metre traveled (typical values are in the 0.001-0.02 range).
     """
     n = min(len(poses_est), len(poses_gt))
     if n < 2:
@@ -855,8 +857,8 @@ def kitti_segment_errors(
 
         if t_errs:
             per_length[L] = (
-                float(np.mean(t_errs)) * 100.0,  # → %
-                float(np.mean(r_errs)) * 180.0 / np.pi,  # → deg/m
+                float(np.mean(t_errs)) * 100.0,  # fraction → %
+                float(np.mean(r_errs)) * (180.0 / np.pi),  # rad/m → deg/m
             )
             all_t.extend(t_errs)
             all_r.extend(r_errs)
@@ -864,7 +866,7 @@ def kitti_segment_errors(
     if all_t:
         overall = (
             float(np.mean(all_t)) * 100.0,
-            float(np.mean(all_r)) * 180.0 / np.pi,
+            float(np.mean(all_r)) * (180.0 / np.pi),
         )
     else:
         overall = (float("nan"), float("nan"))
@@ -874,6 +876,17 @@ def kitti_segment_errors(
         "overall": overall,
         "n_segments": len(all_t),
     }
+
+
+def save_kitti_meta(path: str, wall_seconds: float) -> None:
+    """Write a one-line sidecar with the wall-clock time of ``slam.run()``.
+
+    The only information the benchmark actually needs beyond what's already
+    in the ``.txt`` trajectory (frame count, poses) is how long the run
+    took — everything else (seconds per frame, etc.) is derivable.
+    """
+    with open(path, "w") as f:
+        f.write(f"wall_seconds {wall_seconds:.4f}\n")
 
 
 def plot_slam_results(
@@ -961,6 +974,7 @@ def main() -> None:
     os.makedirs(args.results_dir, exist_ok=True)
     plot_path = os.path.join(args.results_dir, f"{sequence}.png")
     traj_path = os.path.join(args.results_dir, f"{sequence}.txt")
+    meta_path = os.path.join(args.results_dir, f"{sequence}.meta.txt")
     video_path = (
         None if args.no_video else os.path.join(args.results_dir, f"{sequence}.mp4")
     )
@@ -973,12 +987,23 @@ def main() -> None:
         poses_path=paths["poses_path"],
         config=config,
     )
+    # Wall-clock time for the SLAM run itself (stereo front-end + online
+    # PGO, but NOT the plot/video encoding, which is purely cosmetic).
+    t_start = time.time()
     slam.run()
+    wall_seconds = time.time() - t_start
+    frames = len(slam.live_poses)
+    sec_per_frame = wall_seconds / frames if frames > 0 else 0.0
+    print(
+        f"[seq {sequence}] runtime: {wall_seconds:7.2f} s total "
+        f"({sec_per_frame*1000:6.2f} ms/frame, {frames} frames)"
+    )
 
-    # Save the optimized trajectory in KITTI format for benchmarking +
-    # offline evaluation (compatible with the official evaluate_odometry
-    # devkit and with scripts/kitti_summary.py).
+    # Save the optimized trajectory in KITTI format + metadata sidecar for
+    # benchmarking (compatible with the official evaluate_odometry devkit
+    # and with scripts/kitti_summary.py).
     save_kitti_trajectory(slam.live_poses, traj_path)
+    save_kitti_meta(meta_path, wall_seconds=wall_seconds)
     print(f"[seq {sequence}] trajectory saved: {traj_path}")
 
     if slam.gt_poses is not None:
@@ -996,20 +1021,20 @@ def main() -> None:
         )
 
         # KITTI benchmark-protocol metrics: segment-based drift rates over
-        # sub-trajectories of 100-800 m. This is the number that appears in
-        # every published KITTI VO table.
+        # sub-trajectories of 100-800 m. Units match the KITTI leaderboard:
+        # translation in %, rotation in deg/m.
         kitti_raw = kitti_segment_errors(slam.raw_poses, slam.gt_poses)
         kitti_opt = kitti_segment_errors(slam.live_poses, slam.gt_poses)
         t_raw, r_raw = kitti_raw["overall"]
         t_opt, r_opt = kitti_opt["overall"]
         print(
             f"[seq {sequence}] KITTI raw VO:       "
-            f"t_err {t_raw:6.2f} %,  r_err {r_raw*1000:6.3f} deg/km "
+            f"t_err {t_raw:6.2f} %,  r_err {r_raw:8.5f} deg/m "
             f"({kitti_raw['n_segments']} segs)"
         )
         print(
             f"[seq {sequence}] KITTI SLAM (+PGO):  "
-            f"t_err {t_opt:6.2f} %,  r_err {r_opt*1000:6.3f} deg/km "
+            f"t_err {t_opt:6.2f} %,  r_err {r_opt:8.5f} deg/m "
             f"({kitti_opt['n_segments']} segs)"
         )
         if kitti_opt["per_length"]:
@@ -1017,7 +1042,7 @@ def main() -> None:
             for L, (t, r) in sorted(kitti_opt["per_length"].items()):
                 print(
                     f"[seq {sequence}]   L={int(L):4d} m: "
-                    f"t_err {t:6.2f} %,  r_err {r*1000:6.3f} deg/km"
+                    f"t_err {t:6.2f} %,  r_err {r:8.5f} deg/m"
                 )
 
     plot_slam_results(slam, slam.raw_poses, slam.live_poses, plot_path)
