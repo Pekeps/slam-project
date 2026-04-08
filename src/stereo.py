@@ -1,12 +1,3 @@
-"""Stereo support: calibration loading and sparse stereo depth estimation.
-
-The depth estimator detects features independently in the left and right
-images, ratio-tests their descriptor matches, applies a rectified-pair
-sanity filter (small epipolar residual + positive disparity), then
-triangulates the survivors with the KITTI projection matrices to get
-metric 3D points in the LEFT camera frame.
-"""
-
 from dataclasses import dataclass
 from typing import List
 
@@ -26,7 +17,7 @@ class StereoCalib:
 @dataclass
 class StereoFrame:
     kps: List[cv2.KeyPoint]  # keypoints in the LEFT image
-    desc: np.ndarray  # Nx32 (ORB) descriptors aligned with kps
+    desc: np.ndarray  # descriptors aligned with kps
     pts3d_cam: np.ndarray  # Nx3 3D points in the LEFT camera frame
 
 
@@ -56,7 +47,7 @@ def read_kitti_stereo_calib(calib_path: str) -> StereoCalib:
     return StereoCalib(K=K, P0=P0, P1=P1, baseline=baseline, fx=fx)
 
 
-def estimate_stereo_depth(
+def get_stereo_frame(
     left_img: np.ndarray,
     right_img: np.ndarray,
     calib: StereoCalib,
@@ -67,7 +58,7 @@ def estimate_stereo_depth(
     min_depth: float = 0.1,
     max_depth: float = 200.0,
 ) -> StereoFrame:
-    """Detect features in both stereo images and triangulate metric 3D points.
+    """Detect features in both images and triangulate metric 3D points.
 
     Returns a StereoFrame whose entries are all index-aligned: ``kps[i]``,
     ``desc[i]`` and ``pts3d_cam[i]`` describe the same physical point.
@@ -118,6 +109,7 @@ def estimate_stereo_depth(
 
     # Triangulate in the LEFT camera frame using the KITTI P0/P1.
     X_h = cv2.triangulatePoints(calib.P0, calib.P1, pts_L.T, pts_R.T)
+    # Convert from homogeneous to 3D. Add small epsilon to denominator for safety.
     X = (X_h[:3, :] / (X_h[3, :] + 1e-12)).T  # Nx3
 
     Z = X[:, 2]

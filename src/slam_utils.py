@@ -128,7 +128,7 @@ def pose_error_6d(T_err: np.ndarray) -> np.ndarray:
 # cost of each residual evaluation at graph sizes >~100 vertices.
 
 
-def rigid_inverse_batch(T: np.ndarray) -> np.ndarray:
+def batch_invert_T(T: np.ndarray) -> np.ndarray:
     """Batched closed-form rigid inverse for SE(3) matrices.
 
     For ``T = [[R, t], [0, 1]]`` the inverse is ``[[R.T, -R.T @ t], [0, 1]]``,
@@ -152,7 +152,7 @@ def rigid_inverse_batch(T: np.ndarray) -> np.ndarray:
     return out
 
 
-def se3_exp_batch(xi: np.ndarray) -> np.ndarray:
+def batch_se3_exp(xi: np.ndarray) -> np.ndarray:
     """Batched SE(3) exponential map.
 
     Parameters
