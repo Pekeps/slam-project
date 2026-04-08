@@ -5,5 +5,3 @@ __pycache__/
 # KITTI grayscale image data — keep only sequence 00 (the one the script uses)
 data/data_odometry_gray/dataset/sequences/*
 !data/data_odometry_gray/dataset/sequences/00/
-# Within seq 00, only image_0 (left camera) is used; ignore image_1
-data/data_odometry_gray/dataset/sequences/00/image_1/
