@@ -1,0 +1,97 @@
+warning: dropping 147 unmatched frame(s) (left=3924, right=4071, matched=3924)
+Aloitetaan stereo-SLAM (3924 kuvaa)...
+Frame 0 valmis. KF=1, loopit=0, kartta=175
+Frame 50 valmis. KF=6, loopit=0, kartta=770
+Frame 100 valmis. KF=11, loopit=0, kartta=1389
+Frame 150 valmis. KF=16, loopit=0, kartta=2079
+Frame 200 valmis. KF=21, loopit=0, kartta=2675
+Frame 250 valmis. KF=26, loopit=0, kartta=3326
+Frame 300 valmis. KF=31, loopit=0, kartta=3962
+Frame 350 valmis. KF=36, loopit=0, kartta=4798
+Frame 400 valmis. KF=41, loopit=0, kartta=5359
+Frame 450 valmis. KF=46, loopit=0, kartta=6034
+Frame 500 valmis. KF=51, loopit=0, kartta=6903
+Frame 550 valmis. KF=56, loopit=0, kartta=7316
+Frame 600 valmis. KF=61, loopit=0, kartta=7808
+Frame 650 valmis. KF=66, loopit=0, kartta=8509
+Frame 700 valmis. KF=71, loopit=0, kartta=9188
+Frame 750 valmis. KF=76, loopit=0, kartta=10165
+Frame 800 valmis. KF=81, loopit=0, kartta=10834
+Frame 850 valmis. KF=86, loopit=0, kartta=11555
+Frame 900 valmis. KF=91, loopit=0, kartta=12230
+Frame 950 valmis. KF=96, loopit=0, kartta=13128
+Frame 1000 valmis. KF=101, loopit=0, kartta=13979
+Frame 1050 valmis. KF=106, loopit=0, kartta=14706
+Frame 1100 valmis. KF=111, loopit=0, kartta=15376
+Frame 1150 valmis. KF=116, loopit=0, kartta=15968
+Frame 1200 valmis. KF=121, loopit=0, kartta=16372
+Frame 1250 valmis. KF=126, loopit=0, kartta=17166
+Frame 1300 valmis. KF=131, loopit=0, kartta=17920
+Frame 1350 valmis. KF=136, loopit=0, kartta=18754
+Frame 1400 valmis. KF=141, loopit=0, kartta=19562
+Frame 1450 valmis. KF=146, loopit=0, kartta=20256
+Frame 1500 valmis. KF=151, loopit=0, kartta=21007
+Frame 1550 valmis. KF=156, loopit=0, kartta=21715
+Frame 1600 valmis. KF=161, loopit=0, kartta=22361
+Frame 1650 valmis. KF=166, loopit=0, kartta=22942
+Frame 1700 valmis. KF=171, loopit=0, kartta=23501
+Frame 1750 valmis. KF=176, loopit=0, kartta=24099
+Frame 1800 valmis. KF=181, loopit=0, kartta=24676
+Frame 1850 valmis. KF=186, loopit=0, kartta=25448
+Frame 1900 valmis. KF=191, loopit=0, kartta=25810
+Frame 1950 valmis. KF=196, loopit=0, kartta=26244
+Frame 2000 valmis. KF=201, loopit=0, kartta=26544
+Frame 2050 valmis. KF=206, loopit=0, kartta=26789
+Frame 2100 valmis. KF=211, loopit=0, kartta=27205
+Frame 2150 valmis. KF=216, loopit=0, kartta=27827
+Frame 2200 valmis. KF=221, loopit=0, kartta=28570
+Frame 2250 valmis. KF=226, loopit=0, kartta=29244
+Frame 2300 valmis. KF=231, loopit=0, kartta=29759
+Frame 2350 valmis. KF=236, loopit=0, kartta=30253
+Frame 2400 valmis. KF=241, loopit=0, kartta=31061
+Frame 2450 valmis. KF=246, loopit=0, kartta=31760
+Frame 2500 valmis. KF=251, loopit=0, kartta=32436
+Frame 2550 valmis. KF=256, loopit=0, kartta=33271
+Frame 2600 valmis. KF=261, loopit=0, kartta=33738
+Frame 2650 valmis. KF=266, loopit=0, kartta=34195
+Frame 2700 valmis. KF=271, loopit=0, kartta=34581
+Frame 2750 valmis. KF=276, loopit=0, kartta=34967
+Frame 2800 valmis. KF=281, loopit=0, kartta=35495
+Frame 2850 valmis. KF=286, loopit=0, kartta=36150
+Frame 2900 valmis. KF=291, loopit=0, kartta=36551
+Frame 2950 valmis. KF=296, loopit=0, kartta=37164
+Frame 3000 valmis. KF=301, loopit=0, kartta=37557
+Frame 3050 valmis. KF=306, loopit=0, kartta=38097
+Frame 3100 valmis. KF=311, loopit=0, kartta=38617
+Frame 3150 valmis. KF=316, loopit=0, kartta=39053
+Frame 3200 valmis. KF=321, loopit=0, kartta=39660
+Frame 3250 valmis. KF=326, loopit=0, kartta=40290
+Frame 3300 valmis. KF=331, loopit=0, kartta=41122
+Frame 3350 valmis. KF=336, loopit=0, kartta=41622
+Frame 3400 valmis. KF=341, loopit=0, kartta=42027
+Frame 3450 valmis. KF=346, loopit=0, kartta=42441
+Frame 3500 valmis. KF=351, loopit=0, kartta=42833
+Frame 3550 valmis. KF=356, loopit=0, kartta=43353
+Frame 3600 valmis. KF=361, loopit=0, kartta=44016
+Frame 3650 valmis. KF=366, loopit=0, kartta=44699
+Frame 3700 valmis. KF=371, loopit=0, kartta=45188
+Frame 3750 valmis. KF=376, loopit=0, kartta=45854
+Frame 3800 valmis. KF=381, loopit=0, kartta=46468
+Frame 3850 valmis. KF=386, loopit=0, kartta=47151
+Frame 3900 valmis. KF=391, loopit=0, kartta=47754
+Front-end valmis. Keyframes: 393, loop-sulkeumia: 0, PnP-epäonnistumisia: 0
+[seq 08] trajectory saved: /home/pekko/aalto/visual_perception_and_planning_for_autonomous_driving-EEAEV008/slam-project/results/08.txt
+[seq 08] Raw stereo VO:      final err   72.74 m, RMSE  70.24 m
+[seq 08] Stereo SLAM (+PGO): final err   72.74 m, RMSE  70.24 m
+[seq 08] KITTI raw VO:       t_err   2.96 %,  r_err 13.929 deg/km (2708 segs)
+[seq 08] KITTI SLAM (+PGO):  t_err   2.96 %,  r_err 13.929 deg/km (2708 segs)
+[seq 08] KITTI per-length (SLAM):
+[seq 08]   L= 100 m: t_err   1.79 %,  r_err 20.664 deg/km
+[seq 08]   L= 200 m: t_err   2.16 %,  r_err 17.564 deg/km
+[seq 08]   L= 300 m: t_err   2.60 %,  r_err 15.089 deg/km
+[seq 08]   L= 400 m: t_err   3.08 %,  r_err 13.383 deg/km
+[seq 08]   L= 500 m: t_err   3.36 %,  r_err 11.852 deg/km
+[seq 08]   L= 600 m: t_err   3.53 %,  r_err 10.830 deg/km
+[seq 08]   L= 700 m: t_err   3.70 %,  r_err 10.222 deg/km
+[seq 08]   L= 800 m: t_err   3.85 %,  r_err  9.760 deg/km
+Lopputulos tallennettu: /home/pekko/aalto/visual_perception_and_planning_for_autonomous_driving-EEAEV008/slam-project/results/08.png

@@ -1,0 +1,87 @@
+Aloitetaan stereo-SLAM (1101 kuvaa)...
+Frame 0 valmis. KF=1, loopit=0, kartta=136
+Frame 50 valmis. KF=6, loopit=0, kartta=676
+Frame 100 valmis. KF=11, loopit=0, kartta=1284
+Frame 150 valmis. KF=16, loopit=0, kartta=1979
+Frame 200 valmis. KF=21, loopit=0, kartta=2601
+Frame 250 valmis. KF=26, loopit=0, kartta=2967
+Frame 300 valmis. KF=31, loopit=0, kartta=3513
+Frame 350 valmis. KF=36, loopit=0, kartta=4253
+Frame 400 valmis. KF=41, loopit=0, kartta=4887
+Frame 450 valmis. KF=46, loopit=0, kartta=5791
+Frame 500 valmis. KF=51, loopit=0, kartta=6459
+Frame 550 valmis. KF=56, loopit=0, kartta=6916
+Frame 600 valmis. KF=61, loopit=0, kartta=7335
+Frame 650 valmis. KF=66, loopit=0, kartta=7833
+Frame 700 valmis. KF=71, loopit=0, kartta=8807
+Frame 750 valmis. KF=76, loopit=0, kartta=9606
+Frame 800 valmis. KF=81, loopit=0, kartta=10328
+  frame 850: LOOP KF2 <-> KF85 (inliers=108)
+    PGO: cost 82.081 -> 0.004 (500 nfev)
+Frame 850 valmis. KF=86, loopit=1, kartta=11055
+  frame 860: LOOP KF3 <-> KF86 (inliers=207)
+    PGO: cost 0.054 -> 0.003 (500 nfev)
+  frame 870: LOOP KF4 <-> KF87 (inliers=248)
+    PGO: cost 0.005 -> 0.004 (159 nfev)
+  frame 880: LOOP KF5 <-> KF88 (inliers=101)
+    PGO: cost 0.017 -> 0.005 (7 nfev)
+  frame 890: LOOP KF6 <-> KF89 (inliers=111)
+    PGO: cost 0.007 -> 0.005 (5 nfev)
+  frame 900: LOOP KF7 <-> KF90 (inliers=144)
+    PGO: cost 0.010 -> 0.006 (5 nfev)
+Frame 900 valmis. KF=91, loopit=6, kartta=11536
+  frame 910: LOOP KF8 <-> KF91 (inliers=188)
+    PGO: cost 0.056 -> 0.008 (6 nfev)
+  frame 920: LOOP KF9 <-> KF92 (inliers=129)
+  frame 920: LOOP KF10 <-> KF92 (inliers=65)
+    PGO: cost 1.804 -> 0.417 (9 nfev)
+  frame 930: LOOP KF10 <-> KF93 (inliers=78)
+    PGO: cost 1.056 -> 0.593 (4 nfev)
+  frame 940: LOOP KF11 <-> KF94 (inliers=170)
+    PGO: cost 0.775 -> 0.638 (5 nfev)
+  frame 950: LOOP KF12 <-> KF95 (inliers=222)
+    PGO: cost 0.918 -> 0.643 (4 nfev)
+Frame 950 valmis. KF=96, loopit=12, kartta=12323
+  frame 960: LOOP KF13 <-> KF96 (inliers=243)
+    PGO: cost 0.645 -> 0.643 (3 nfev)
+  frame 970: LOOP KF14 <-> KF97 (inliers=181)
+    PGO: cost 0.645 -> 0.643 (3 nfev)
+  frame 980: LOOP KF15 <-> KF98 (inliers=92)
+    PGO: cost 0.645 -> 0.643 (3 nfev)
+  frame 990: LOOP KF16 <-> KF99 (inliers=107)
+  frame 990: LOOP KF17 <-> KF99 (inliers=74)
+    PGO: cost 0.755 -> 0.662 (4 nfev)
+  frame 1000: LOOP KF17 <-> KF100 (inliers=86)
+  frame 1000: LOOP KF18 <-> KF100 (inliers=91)
+    PGO: cost 0.837 -> 0.698 (4 nfev)
+Frame 1000 valmis. KF=101, loopit=19, kartta=12981
+  frame 1010: LOOP KF19 <-> KF101 (inliers=124)
+    PGO: cost 0.714 -> 0.700 (3 nfev)
+  frame 1020: LOOP KF20 <-> KF102 (inliers=125)
+    PGO: cost 0.714 -> 0.703 (3 nfev)
+  frame 1030: LOOP KF21 <-> KF103 (inliers=86)
+    PGO: cost 0.714 -> 0.703 (3 nfev)
+  frame 1050: LOOP KF23 <-> KF105 (inliers=116)
+    PGO: cost 0.743 -> 0.706 (4 nfev)
+Frame 1050 valmis. KF=106, loopit=23, kartta=13390
+  frame 1060: LOOP KF24 <-> KF106 (inliers=93)
+    PGO: cost 0.709 -> 0.706 (4 nfev)
+  frame 1090: LOOP KF28 <-> KF109 (inliers=68)
+    PGO: cost 1.041 -> 0.707 (4 nfev)
+Frame 1100 valmis. KF=111, loopit=25, kartta=13856
+Front-end valmis. Keyframes: 111, loop-sulkeumia: 25, PnP-epäonnistumisia: 0
+[seq 06] trajectory saved: /home/pekko/aalto/visual_perception_and_planning_for_autonomous_driving-EEAEV008/slam-project/results/06.txt
+[seq 06] Raw stereo VO:      final err   15.10 m, RMSE  13.20 m
+[seq 06] Stereo SLAM (+PGO): final err   10.35 m, RMSE   6.22 m
+[seq 06] KITTI raw VO:       t_err   3.11 %,  r_err 14.781 deg/km (570 segs)
+[seq 06] KITTI SLAM (+PGO):  t_err   3.87 %,  r_err 19.508 deg/km (570 segs)
+[seq 06] KITTI per-length (SLAM):
+[seq 06]   L= 100 m: t_err   3.35 %,  r_err 31.894 deg/km
+[seq 06]   L= 200 m: t_err   4.28 %,  r_err 25.782 deg/km
+[seq 06]   L= 300 m: t_err   5.27 %,  r_err 22.432 deg/km
+[seq 06]   L= 400 m: t_err   5.46 %,  r_err 18.034 deg/km
+[seq 06]   L= 500 m: t_err   4.56 %,  r_err 14.325 deg/km
+[seq 06]   L= 600 m: t_err   3.17 %,  r_err 11.801 deg/km
+[seq 06]   L= 700 m: t_err   1.90 %,  r_err  8.288 deg/km
+[seq 06]   L= 800 m: t_err   0.76 %,  r_err  5.536 deg/km
+Lopputulos tallennettu: /home/pekko/aalto/visual_perception_and_planning_for_autonomous_driving-EEAEV008/slam-project/results/06.png

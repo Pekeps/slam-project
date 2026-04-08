@@ -1,0 +1,51 @@
+Aloitetaan stereo-SLAM (1591 kuvaa)...
+Frame 0 valmis. KF=1, loopit=0, kartta=158
+Frame 50 valmis. KF=6, loopit=0, kartta=750
+Frame 100 valmis. KF=11, loopit=0, kartta=1538
+Frame 150 valmis. KF=16, loopit=0, kartta=2468
+Frame 200 valmis. KF=21, loopit=0, kartta=3034
+Frame 250 valmis. KF=26, loopit=0, kartta=3967
+Frame 300 valmis. KF=31, loopit=0, kartta=4790
+Frame 350 valmis. KF=36, loopit=0, kartta=5431
+Frame 400 valmis. KF=41, loopit=0, kartta=6153
+Frame 450 valmis. KF=46, loopit=0, kartta=6777
+Frame 500 valmis. KF=51, loopit=0, kartta=7395
+Frame 550 valmis. KF=56, loopit=0, kartta=7930
+Frame 600 valmis. KF=61, loopit=0, kartta=8586
+Frame 650 valmis. KF=66, loopit=0, kartta=9284
+Frame 700 valmis. KF=71, loopit=0, kartta=10059
+Frame 750 valmis. KF=76, loopit=0, kartta=10662
+Frame 800 valmis. KF=81, loopit=0, kartta=11188
+Frame 850 valmis. KF=86, loopit=0, kartta=11756
+Frame 900 valmis. KF=91, loopit=0, kartta=12416
+Frame 950 valmis. KF=96, loopit=0, kartta=13077
+Frame 1000 valmis. KF=101, loopit=0, kartta=14058
+Frame 1050 valmis. KF=106, loopit=0, kartta=15064
+Frame 1100 valmis. KF=111, loopit=0, kartta=15736
+Frame 1150 valmis. KF=116, loopit=0, kartta=16684
+Frame 1200 valmis. KF=121, loopit=0, kartta=17510
+Frame 1250 valmis. KF=126, loopit=0, kartta=18128
+Frame 1300 valmis. KF=131, loopit=0, kartta=18878
+Frame 1350 valmis. KF=136, loopit=0, kartta=19605
+Frame 1400 valmis. KF=141, loopit=0, kartta=20180
+Frame 1450 valmis. KF=146, loopit=0, kartta=20798
+Frame 1500 valmis. KF=151, loopit=0, kartta=21711
+Frame 1550 valmis. KF=156, loopit=0, kartta=22635
+  frame 1590: LOOP KF2 <-> KF159 (inliers=85)
+    PGO: cost 4066.247 -> 359.911 (500 nfev)
+Front-end valmis. Keyframes: 160, loop-sulkeumia: 1, PnP-epäonnistumisia: 0
+[seq 09] trajectory saved: /home/pekko/aalto/visual_perception_and_planning_for_autonomous_driving-EEAEV008/slam-project/results/09.txt
+[seq 09] Raw stereo VO:      final err   93.89 m, RMSE  66.16 m
+[seq 09] Stereo SLAM (+PGO): final err   42.34 m, RMSE  65.45 m
+[seq 09] KITTI raw VO:       t_err   4.00 %,  r_err 15.333 deg/km (958 segs)
+[seq 09] KITTI SLAM (+PGO):  t_err   6.02 %,  r_err 24.030 deg/km (958 segs)
+[seq 09] KITTI per-length (SLAM):
+[seq 09]   L= 100 m: t_err   4.16 %,  r_err 40.958 deg/km
+[seq 09]   L= 200 m: t_err   4.62 %,  r_err 27.777 deg/km
+[seq 09]   L= 300 m: t_err   5.36 %,  r_err 23.624 deg/km
+[seq 09]   L= 400 m: t_err   5.67 %,  r_err 20.690 deg/km
+[seq 09]   L= 500 m: t_err   6.40 %,  r_err 18.907 deg/km
+[seq 09]   L= 600 m: t_err   7.26 %,  r_err 18.246 deg/km
+[seq 09]   L= 700 m: t_err   8.18 %,  r_err 17.922 deg/km
+[seq 09]   L= 800 m: t_err   8.54 %,  r_err 15.799 deg/km
+Lopputulos tallennettu: /home/pekko/aalto/visual_perception_and_planning_for_autonomous_driving-EEAEV008/slam-project/results/09.png
